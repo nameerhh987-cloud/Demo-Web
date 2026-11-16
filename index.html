@@ -8,6 +8,22 @@
     <meta name="theme-color" content="#060606">
     <title id="page-title">Gym-Plus | Hardcore Fitness in Karachi</title>
     <meta name="description" content="Heavy iron, certified coaches, power backup and AC. Book a free trial.">
+    <link rel="icon"
+        href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ctext y='.9em' font-size='90'%3E%F0%9F%8F%8B%EF%B8%8F%3C/text%3E%3C/svg%3E">
+
+    <!-- Link preview (WhatsApp / Facebook / etc.) -->
+    <meta property="og:type" content="website">
+    <meta property="og:site_name" content="Gym-Plus">
+    <meta property="og:title" content="Hardcore Fitness | Book a free trial">
+    <meta property="og:description"
+        content="Heavy iron, certified coaches, power backup and AC. Book a free trial on WhatsApp.">
+    <meta property="og:image"
+        content="https://images.unsplash.com/photo-1583454110551-21f2fa2afe61?auto=format&amp;fit=crop&amp;w=1200&amp;h=630&amp;q=70&amp;sat=-100">
+    <meta property="og:image:width" content="1200">
+    <meta property="og:image:height" content="630">
+    <meta property="og:image:alt" content="Bodybuilder in a dark gym">
+    <meta name="twitter:card" content="summary_large_image">
+
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <script src="https://cdn.tailwindcss.com/3.4.17"></script>
@@ -1982,10 +1998,13 @@
                 lock('loader', true);
 
                 /* ======== URL PARAMETERS ========
-                   name, city, address, phone, color, title, hero, p1, p2, p3
-                   ?name=Iron House&city=Lahore&address=Block 5, Clifton&phone=03001234567&color=ef4444&title=Build Your Beast&p1=5000&p2=12000&p3=40000
+                   Short:  n=name  c=city  a=address  p=phone  k=color  t=title  h=hero image
+                   Long:   name city address phone color title hero (also work)
+                   Prices: p1 p2 p3
+                   e.g.  ?n=Iron House&c=Lahore&a=Block 5, Clifton&p=03001234567&k=red
                 */
                 const P = new URLSearchParams(location.search);
+                [['n', 'name'], ['a', 'address'], ['c', 'city'], ['p', 'phone'], ['t', 'title'], ['k', 'color'], ['h', 'hero']].forEach(([s, l]) => { if (P.has(s) && !P.has(l)) P.set(l, P.get(s)) });
                 const clean = (k, d, max = 80) => (P.get(k) || d).trim().slice(0, max) || d;
                 const gym = clean('name', 'Gym-Plus'), addr = clean('address', 'Main Boulevard, Block 4, Gulshan-e-Iqbal'), city = clean('city', 'Karachi'), title = clean('title', 'Build Your Legacy', 30);
                 let ph = (P.get('phone') || '923001234567').replace(/\D/g, '');
